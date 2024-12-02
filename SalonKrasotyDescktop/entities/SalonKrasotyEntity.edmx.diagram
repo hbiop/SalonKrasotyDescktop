@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2aca8899a5434aeca768a1d9d39cb9a9" Name="Diagram1">
+        <EntityTypeShape EntityType="SalonKrasotyModel.Client" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.ClientService" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.DocumentByService" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.Gender" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.Manufacturer" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.Product" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.ProductPhoto" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.ProductSale" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.Service" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.ServicePhoto" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonKrasotyModel.Tag" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_Client_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_ClientService_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_ClientService_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_DocumentByService_ClientService" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_ProductSale_ClientService" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_Product_Manufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_ProductPhoto_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_ProductSale_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.FK_ServicePhoto_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.AttachedProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonKrasotyModel.TagOfClient" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
