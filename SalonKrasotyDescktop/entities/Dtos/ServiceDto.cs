@@ -8,6 +8,7 @@ namespace SalonKrasotyDescktop.entities.Dtos
 {
     public class ServiceDto
     {
+        public int Id { get; set; }
         public string PicPath { get; set; }
         public string Title { get; set; }
         public decimal Cost { get; set; }

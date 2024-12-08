@@ -22,6 +22,7 @@ namespace SalonKrasotyDescktop.ViewModels
         {
             services = _salon.Service.Select(service => new ServiceDto
             {
+                Id = service.ID,
                 PicPath = "images/Услуги салона красоты/none.jpg",
                 Title = service.Title,
                 Cost = service.Cost,
@@ -46,6 +47,24 @@ namespace SalonKrasotyDescktop.ViewModels
             {
                 _isAdmin = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public void DeleteService(int id)
+        {
+            int count = _salon.ClientService.Where(cs => cs.Service.ID == id).Count();
+            if(count > 0)
+            {
+                MessageBox.Show("Вы не можете удалить эту услугу так как есть записи");
+            }
+            else
+            {
+                foreach(var sp in _salon.ServicePhoto.Where(sp2 => sp2.ServiceID == id))
+                {
+                    _salon.ServicePhoto.Remove(sp);
+                }
+                _salon.Service.Remove(_salon.Service.Where(s => s.ID == id).FirstOrDefault());
+                _salon.SaveChanges();
             }
         }
         public void IsAdmin(string input)
@@ -76,7 +95,7 @@ namespace SalonKrasotyDescktop.ViewModels
         }
         public void Search(string searchWord)
         {
-            services = services.Where(s => s.Title.Contains(searchWord) || s.Description.Contains(searchWord)).ToList();
+            services = services.Where(s => s.Title.ToLower().Contains(searchWord.ToLower()) || s.Description.ToLower().Contains(searchWord.ToLower())).ToList();
         }
 
         public void Sort(int sortType)

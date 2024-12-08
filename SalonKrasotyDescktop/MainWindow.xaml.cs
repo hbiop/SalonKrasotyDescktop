@@ -60,5 +60,39 @@ namespace SalonKrasotyDescktop
             Search = tbSearch.Text;
             mainViewModel.GetData(Sort, Filter, Search);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(sender != null && sender is Button)
+            {
+                Button btn = (Button)sender;
+                if(btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int a))
+                {
+                    mainViewModel.DeleteService(a);
+                }
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddUser addUser = new AddUser(mainViewModel);
+            this.Close();
+            addUser.ShowDialog();
+            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (sender != null && sender is Button)
+            {
+                Button btn = (Button)sender;
+                if (btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int a))
+                {
+                    AddUser addUser = new AddUser(mainViewModel, mainViewModel.services.Where(s => s.Id == a).FirstOrDefault());
+                    this.Close();
+                    addUser.ShowDialog();
+                }
+            }
+        }
     }
 }

@@ -74,6 +74,9 @@
     </Compile>
     <Compile Include="BackgroundValueConverter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="views\Forms\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\Forms\EnterAdminCode.xaml.cs">
       <DependentUpon>EnterAdminCode.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\Forms\AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\Forms\EnterAdminCode.xaml" />
   </ItemGroup>
   <ItemGroup>
