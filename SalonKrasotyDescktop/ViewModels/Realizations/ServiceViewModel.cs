@@ -70,12 +70,20 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
             }
             else
             {
-                foreach (var sp in _salon.ServicePhoto.Where(sp2 => sp2.ServiceID == id))
+                try
                 {
-                    _salon.ServicePhoto.Remove(sp);
+                    foreach (var sp in _salon.ServicePhoto.Where(sp2 => sp2.ServiceID == id))
+                    {
+                        _salon.ServicePhoto.Remove(sp);
+                    }
+                    _salon.Service.Remove(_salon.Service.Where(s => s.ID == id).FirstOrDefault());
+                    _salon.SaveChanges();
+                    MessageBox.Show("Пользователь был удалён");
                 }
-                _salon.Service.Remove(_salon.Service.Where(s => s.ID == id).FirstOrDefault());
-                _salon.SaveChanges();
+                catch 
+                {
+                    MessageBox.Show("Произошла непредвиденая ошибка");
+                }
             }
         }
 
@@ -87,6 +95,79 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
             FilterDiscount(filterType);
             Search(searchWord);
             countVivodRecords = services.Count;
+        }
+
+        public void AddService(Service service)
+        {
+            int ServiceCounter = _salon.Service.Where(s => s.Title.ToLower() == service.Title.ToLower()).Count();
+            if(ServiceCounter == 0 && service.DurationInSeconds > 0 && service.DurationInSeconds / 60 / 60 < 4)
+            {
+                try
+                {
+                    _salon.Service.Add(service);
+                    _salon.SaveChanges();
+                    MessageBox.Show("Услуга была добавлена");
+                }
+                catch
+                {
+                    MessageBox.Show("Произошла непредвиденая ошибка");
+                }
+
+            }
+            else
+            {
+                if(ServiceCounter > 0)
+                {
+                    MessageBox.Show("Такая услуга уже существует");
+                }
+                if(service.DurationInSeconds <= 0)
+                {
+                    MessageBox.Show("Услуга не может иметь отрицательное значение или 0");
+                }
+                if(service.DurationInSeconds / 60 / 60 > 4)
+                {
+                    MessageBox.Show("Услуга не может проводится 4 часа");
+                }
+            }
+            
+        }
+
+        public void ChangeService(Service service)
+        {
+            int ServiceCounter = _salon.Service.Where(s => s.Title.ToLower() == service.Title.ToLower() && s.ID != service.ID).Count();
+            if (ServiceCounter == 0 && service.DurationInSeconds > 0 && service.DurationInSeconds / 60 / 60 < 4 && service.Title.Length <= 100)
+            {
+                try
+                {
+                    _salon.Entry(service);
+                    _salon.SaveChanges();
+                    MessageBox.Show("Услуга была добавлена");
+                }
+                catch
+                {
+                    MessageBox.Show("Произошла непредвиденая ошибка");
+                }
+
+            }
+            else
+            {
+                if (ServiceCounter > 0)
+                {
+                    MessageBox.Show("Такая услуга уже существует");
+                }
+                if(service.Title.Length > 100)
+                {
+                    MessageBox.Show("Название должно содержать меньше чем 100 символов");
+                }
+                if (service.DurationInSeconds <= 0)
+                {
+                    MessageBox.Show("Услуга не может иметь отрицательное значение или 0");
+                }
+                if (service.DurationInSeconds / 60 / 60 > 4)
+                {
+                    MessageBox.Show("Услуга не может проводится 4 часа");
+                }
+            }
         }
 
         public void Search(string searchWord)

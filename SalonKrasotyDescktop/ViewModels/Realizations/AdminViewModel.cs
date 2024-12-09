@@ -8,7 +8,7 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
     public class AdminViewModel : IAdminViewModel, INotifyPropertyChanged
     {
         private static readonly string AdminCode = "0000";
-        private bool _isAdmin;
+        private static bool _isAdmin;
         
         public bool IsAdmin
         {

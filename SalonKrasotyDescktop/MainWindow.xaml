@@ -110,8 +110,8 @@
                                     <TextBlock Text=" %"/>
                                 </StackPanel>
                                 <StackPanel x:Name="MyStackPanel2" Style="{StaticResource Style2}" Orientation="Horizontal">
-                                    <Button Content="редактировать" Tag="{Binding Id}" Click="Button_Click_1" Margin="2,2,2,2" Background="White" BorderBrush="Gray" BorderThickness="2"/>
-                                    <Button Content="удалить" Tag="{Binding Id}" Click="Button_Click" Margin="2,2,2,2" Background="White" BorderBrush="Gray" BorderThickness="2"/>
+                                    <Button Content="редактировать" Tag="{Binding Id}" Click="ButtonChange" Margin="2,2,2,2" Background="White" BorderBrush="Gray" BorderThickness="2"/>
+                                    <Button Content="удалить" Tag="{Binding Id}" Click="ButtonDelete" Margin="2,2,2,2" Background="White" BorderBrush="Gray" BorderThickness="2"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

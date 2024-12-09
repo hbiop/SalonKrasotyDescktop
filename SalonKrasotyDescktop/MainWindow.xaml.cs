@@ -65,7 +65,7 @@ namespace SalonKrasotyDescktop
             _serviceViewModel.GetServices(Sort, Filter, Search);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonDelete(object sender, RoutedEventArgs e)
         {
             if(sender != null && sender is Button)
             {
@@ -85,14 +85,14 @@ namespace SalonKrasotyDescktop
             
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ButtonChange(object sender, RoutedEventArgs e)
         {
             if (sender != null && sender is Button)
             {
                 Button btn = (Button)sender;
-                if (btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int a))
+                if (btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int id))
                 {
-                    AddUser addUser = new AddUser(_serviceViewModel, _serviceViewModel.services.Where(s => s.Id == a).FirstOrDefault());
+                    AddUser addUser = new AddUser(_serviceViewModel, _serviceViewModel.services.Where(s => s.Id == id).FirstOrDefault());
                     this.Close();
                     addUser.ShowDialog();
                 }
