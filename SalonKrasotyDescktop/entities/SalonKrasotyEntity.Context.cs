@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalonKrasotyDescktop.entities
+namespace SalonKrasotyDescktop.Entities
 {
     using System;
     using System.Data.Entity;

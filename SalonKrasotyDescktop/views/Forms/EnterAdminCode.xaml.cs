@@ -1,12 +1,13 @@
 ﻿using System.Windows;
 using SalonKrasotyDescktop.ViewModels;
+using SalonKrasotyDescktop.ViewModels.Interfaces;
 
 namespace SalonKrasotyDescktop.views.Forms
 {
     public partial class EnterAdminCode : Window
     {
-        MainViewModel viewModel;
-        public EnterAdminCode(MainViewModel viewModel)
+        IAdminViewModel viewModel;
+        public EnterAdminCode(IAdminViewModel viewModel)
         {
             InitializeComponent();
             this.viewModel = viewModel;
@@ -14,7 +15,7 @@ namespace SalonKrasotyDescktop.views.Forms
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            viewModel.IsAdmin(TbAdminCode.Text);
+            viewModel.CheckIsAdmin(TbAdminCode.Text);
         }
     }
 }

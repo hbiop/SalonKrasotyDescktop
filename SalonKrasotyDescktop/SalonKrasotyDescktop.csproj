@@ -72,72 +72,77 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BackgroundValueConverter.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="views\Forms\AddUser.xaml.cs">
+    <Compile Include="Converters\BackgroundValueConverter.cs" />
+    <Compile Include="Mappers\Interfaces\IServiceMapper.cs" />
+    <Compile Include="Mappers\Realizations\ServiceMapper.cs" />
+    <Compile Include="ViewModels\Interfaces\IServiceViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IAdminViewModel.cs" />
+    <Compile Include="ViewModels\Realizations\AdminViewModel.cs" />
+    <Compile Include="ViewModels\Realizations\ServiceViewModel.cs" />
+    <Compile Include="Views\Forms\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="views\Forms\EnterAdminCode.xaml.cs">
+    <Compile Include="Views\Forms\EnterAdminCode.xaml.cs">
       <DependentUpon>EnterAdminCode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="entities\Client.cs">
+    <Compile Include="Entities\Client.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\ClientService.cs">
+    <Compile Include="Entities\ClientService.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\DocumentByService.cs">
+    <Compile Include="Entities\DocumentByService.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\Dtos\ServiceDto.cs" />
-    <Compile Include="entities\Gender.cs">
+    <Compile Include="Entities\Dtos\ServiceDto.cs" />
+    <Compile Include="Entities\Gender.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\Manufacturer.cs">
+    <Compile Include="Entities\Manufacturer.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\Product.cs">
+    <Compile Include="Entities\Product.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\ProductPhoto.cs">
+    <Compile Include="Entities\ProductPhoto.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\ProductSale.cs">
+    <Compile Include="Entities\ProductSale.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\SalonKrasotyEntity.Context.cs">
+    <Compile Include="Entities\SalonKrasotyEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalonKrasotyEntity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\SalonKrasotyEntity.cs">
+    <Compile Include="Entities\SalonKrasotyEntity.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\SalonKrasotyEntity.Designer.cs">
+    <Compile Include="Entities\SalonKrasotyEntity.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalonKrasotyEntity.edmx</DependentUpon>
     </Compile>
-    <Compile Include="entities\Service.cs">
+    <Compile Include="Entities\Service.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\ServicePhoto.cs">
+    <Compile Include="Entities\ServicePhoto.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="entities\Tag.cs">
+    <Compile Include="Entities\Tag.cs">
       <DependentUpon>SalonKrasotyEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="views\Forms\AddUser.xaml">
+    <Page Include="Views\Forms\AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="views\Forms\EnterAdminCode.xaml" />
+    <Page Include="Views\Forms\EnterAdminCode.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -157,11 +162,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="entities\SalonKrasotyEntity.edmx">
+    <EntityDeploy Include="Entities\SalonKrasotyEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SalonKrasotyEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="entities\SalonKrasotyEntity.edmx.diagram">
+    <None Include="Entities\SalonKrasotyEntity.edmx.diagram">
       <DependentUpon>SalonKrasotyEntity.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -174,12 +179,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="entities\SalonKrasotyEntity.Context.tt">
+    <Content Include="Entities\SalonKrasotyEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SalonKrasotyEntity.Context.cs</LastGenOutput>
       <DependentUpon>SalonKrasotyEntity.edmx</DependentUpon>
     </Content>
-    <Content Include="entities\SalonKrasotyEntity.tt">
+    <Content Include="Entities\SalonKrasotyEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SalonKrasotyEntity.edmx</DependentUpon>
       <LastGenOutput>SalonKrasotyEntity.cs</LastGenOutput>
@@ -188,11 +193,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="converters\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Услуги салона красоты\none.jpg" />
+    <Resource Include="Images\Услуги салона красоты\none.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

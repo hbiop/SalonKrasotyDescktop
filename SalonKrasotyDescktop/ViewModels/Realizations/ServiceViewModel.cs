@@ -1,80 +1,26 @@
-﻿using SalonKrasotyDescktop.entities;
-using SalonKrasotyDescktop.entities.Dtos;
+﻿using SalonKrasotyDescktop.entities.Dtos;
+using SalonKrasotyDescktop.entities;
+using SalonKrasotyDescktop.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using SalonKrasotyDescktop.Mappers.Interfaces;
+using SalonKrasotyDescktop.Mappers.Realizations;
+using SalonKrasotyDescktop.Entities;
 
-namespace SalonKrasotyDescktop.ViewModels
+namespace SalonKrasotyDescktop.ViewModels.Realizations
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class ServiceViewModel : IServiceViewModel, INotifyPropertyChanged
     {
-        
-        public MainViewModel(SalonKrasotyEntities salon)
-        {
-            _salon = salon;
-            Init();
-            services = services.OrderBy(s => s.NewCost).ToList();
-        }
-        public void Init()
-        {
-            services = _salon.Service.Select(service => new ServiceDto
-            {
-                Id = service.ID,
-                PicPath = "images/Услуги салона красоты/none.jpg",
-                Title = service.Title,
-                Cost = service.Cost,
-                Time = service.DurationInSeconds / 60,
-                Discount = service.Discount ?? 0,
-                Description = service.Description ?? "",
-            }).ToList();
-            foreach (var s in services)
-            {
-                s.NewCost = s.Discount == 0
-                           ? s.Cost
-                           : s.Cost - (s.Cost / 100 * (decimal)s.Discount);
-            }
-        }
-        //Admin
-        private static readonly string AdminCode = "0000";
-        private bool _isAdmin;
-        public bool isAdmin
-        {
-            get => _isAdmin;
-            set
-            {
-                _isAdmin = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public void DeleteService(int id)
-        {
-            int count = _salon.ClientService.Where(cs => cs.Service.ID == id).Count();
-            if(count > 0)
-            {
-                MessageBox.Show("Вы не можете удалить эту услугу так как есть записи");
-            }
-            else
-            {
-                foreach(var sp in _salon.ServicePhoto.Where(sp2 => sp2.ServiceID == id))
-                {
-                    _salon.ServicePhoto.Remove(sp);
-                }
-                _salon.Service.Remove(_salon.Service.Where(s => s.ID == id).FirstOrDefault());
-                _salon.SaveChanges();
-            }
-        }
-        public void IsAdmin(string input)
-        {
-            isAdmin = AdminCode == input;
-        }
-        //services
         private List<ServiceDto> _services = new List<ServiceDto>();
+        private IServiceMapper serviceMapper = new ServiceMapper();
         SalonKrasotyEntities _salon;
-        public List<ServiceDto> services 
+        public List<ServiceDto> services
         {
             get => _services;
             set
@@ -83,16 +29,66 @@ namespace SalonKrasotyDescktop.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        public void GetData(int sortType, int filterType, string searchWord)
+        private int _countAllRecords;
+        public int countAllRecords
         {
-            Init();
+            get => _countAllRecords;
+            set
+            {
+                _countAllRecords = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _countVivodRecords;
+        public int countVivodRecords
+        {
+            get => _countVivodRecords;
+            set
+            {
+                _countVivodRecords = value;
+                OnPropertyChanged();
+            }
+        }
+        public ServiceViewModel(SalonKrasotyEntities salon)
+        {
+            _salon = salon;
+            InitData();
+            services = services.OrderBy(s => s.NewCost).ToList();
+        }
+
+        public void InitData()
+        {
+            services = serviceMapper.MapToDtos(_salon.Service.ToList());
+        }
+
+        public void DeleteService(int id)
+        {
+            int count = _salon.ClientService.Where(cs => cs.Service.ID == id).Count();
+            if (count > 0)
+            {
+                MessageBox.Show("Вы не можете удалить эту услугу так как есть записи");
+            }
+            else
+            {
+                foreach (var sp in _salon.ServicePhoto.Where(sp2 => sp2.ServiceID == id))
+                {
+                    _salon.ServicePhoto.Remove(sp);
+                }
+                _salon.Service.Remove(_salon.Service.Where(s => s.ID == id).FirstOrDefault());
+                _salon.SaveChanges();
+            }
+        }
+
+        public void GetServices(int sortType, int filterType, string searchWord)
+        {
+            InitData();
             countAllRecords = services.Count;
             Sort(sortType);
             FilterDiscount(filterType);
             Search(searchWord);
             countVivodRecords = services.Count;
         }
+
         public void Search(string searchWord)
         {
             services = services.Where(s => s.Title.ToLower().Contains(searchWord.ToLower()) || s.Description.ToLower().Contains(searchWord.ToLower())).ToList();
@@ -112,7 +108,7 @@ namespace SalonKrasotyDescktop.ViewModels
                     services = services.OrderBy(s => s.NewCost).ToList();
                     break;
             }
-            
+
         }
 
         public void FilterDiscount(int filterType)
@@ -143,9 +139,6 @@ namespace SalonKrasotyDescktop.ViewModels
             }
         }
 
-        
-        
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -159,27 +152,6 @@ namespace SalonKrasotyDescktop.ViewModels
             field = value;
             OnPropertyChanged(propertyName);
             return true;
-        }
-
-        private int _countAllRecords;
-        public int countAllRecords
-        {
-            get => _countAllRecords;
-            set
-            {
-                _countAllRecords = value;
-                OnPropertyChanged();
-            }
-        }
-        private int _countVivodRecords;
-        public int countVivodRecords
-        {
-            get => _countVivodRecords;
-            set
-            {
-                _countVivodRecords = value;
-                OnPropertyChanged();
-            }
         }
     }
 }

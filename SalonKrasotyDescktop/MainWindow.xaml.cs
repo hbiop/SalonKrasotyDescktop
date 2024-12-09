@@ -15,7 +15,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SalonKrasotyDescktop.ViewModels;
+using SalonKrasotyDescktop.ViewModels.Realizations;
 using SalonKrasotyDescktop.views.Forms;
+using SalonKrasotyDescktop.ViewModels.Interfaces;
+using SalonKrasotyDescktop.Entities;
 
 namespace SalonKrasotyDescktop
 {
@@ -25,40 +28,41 @@ namespace SalonKrasotyDescktop
     public partial class MainWindow : Window
     {
         static SalonKrasotyEntities salon = new SalonKrasotyEntities();
-        MainViewModel mainViewModel = new MainViewModel(salon);
         private static int Sort = 0;
         private static int Filter = 0;
         private static string Search = "";
-
+        private IAdminViewModel _adminViewModel = new AdminViewModel();
+        private IServiceViewModel _serviceViewModel = new ServiceViewModel(salon);
         public MainWindow()
         {
             InitializeComponent();
-            lvServices.DataContext = mainViewModel;
-            stPanel.DataContext = mainViewModel;
+            lvServices.DataContext = _serviceViewModel;
+            stPanel.DataContext = _serviceViewModel;
+            DataContext = _adminViewModel;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            EnterAdminCode enterAdminCode = new EnterAdminCode(mainViewModel);
+            EnterAdminCode enterAdminCode = new EnterAdminCode(_adminViewModel);
             enterAdminCode.ShowDialog();
         }
 
         private void cmbSortStoimost_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Sort = cmbSortStoimost.SelectedIndex;
-            mainViewModel.GetData(Sort, Filter, Search);
+            _serviceViewModel.GetServices(Sort, Filter, Search);
         }
 
         private void cmbFilterDisount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Filter = cmbFilterDisount.SelectedIndex;
-            mainViewModel.GetData(Sort, Filter, Search);
+            _serviceViewModel.GetServices(Sort, Filter, Search);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Search = tbSearch.Text;
-            mainViewModel.GetData(Sort, Filter, Search);
+            _serviceViewModel.GetServices(Sort, Filter, Search);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -66,16 +70,16 @@ namespace SalonKrasotyDescktop
             if(sender != null && sender is Button)
             {
                 Button btn = (Button)sender;
-                if(btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int a))
+                if(btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int id))
                 {
-                    mainViewModel.DeleteService(a);
+                    _serviceViewModel.DeleteService(id);
                 }
             }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            AddUser addUser = new AddUser(mainViewModel);
+            AddUser addUser = new AddUser(_serviceViewModel);
             this.Close();
             addUser.ShowDialog();
             
@@ -88,7 +92,7 @@ namespace SalonKrasotyDescktop
                 Button btn = (Button)sender;
                 if (btn.Tag != null && Int32.TryParse(Convert.ToString(btn.Tag), out int a))
                 {
-                    AddUser addUser = new AddUser(mainViewModel, mainViewModel.services.Where(s => s.Id == a).FirstOrDefault());
+                    AddUser addUser = new AddUser(_serviceViewModel, _serviceViewModel.services.Where(s => s.Id == a).FirstOrDefault());
                     this.Close();
                     addUser.ShowDialog();
                 }

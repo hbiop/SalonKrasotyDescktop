@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "D:\need\c#_projects\SalonKrasotyDescktop\SalonKrasotyDescktop\entities\SalonKrasotyEntity.edmx" включено. 
+﻿// Создание кода T4 для модели "D:\Acollege\SK\SalonKrasotyDescktop\SalonKrasotyDescktop\Entities\SalonKrasotyEntity.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

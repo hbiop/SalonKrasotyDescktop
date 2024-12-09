@@ -8,8 +8,16 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <local:BackgroundValueConverter x:Key="BackgroundValueConverter"></local:BackgroundValueConverter>
-        <Style x:Key="style" TargetType="StackPanel">
-            
+        <Style x:Key="AddButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsAdmin}" Value="false">
+                    <DataTrigger.Setters>
+                        <Setter Property="Visibility" Value="Hidden"/>
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="Style" TargetType="StackPanel">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Discount}" Value="0">
                     <DataTrigger.Setters>
@@ -18,7 +26,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="style3" TargetType="TextBlock">
+        <Style x:Key="Style3" TargetType="TextBlock">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Discount}" Value="0">
                     <DataTrigger.Setters>
@@ -27,18 +35,18 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="style2" TargetType="StackPanel">
+        <Style x:Key="Style2" TargetType="StackPanel">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=DataContext.isAdmin}" Value="False">
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.IsAdmin}" Value="False">
                     <DataTrigger.Setters>
                         <Setter Property="Visibility" Value="Hidden"/>
                     </DataTrigger.Setters>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="buttonAdmin" TargetType="Button">
+        <Style x:Key="ButtonAdmin" TargetType="Button">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=DataContext.isAdmin}" Value="False">
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Window.DataContext.isAdmin}" Value="False">
                     <DataTrigger.Setters>
                         <Setter Property="Visibility" Value="Hidden"/>
                     </DataTrigger.Setters>
@@ -90,18 +98,18 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Title}"/>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock TextDecorations="Strikethrough" Text="{Binding Cost}" Style="{StaticResource style3}"/>
+                                    <TextBlock TextDecorations="Strikethrough" Text="{Binding Cost}" Style="{StaticResource Style3}"/>
                                     <TextBlock Text="{Binding NewCost}"/>
                                     <TextBlock Text=" рублей за "/>
                                     <TextBlock Text="{Binding Time}"/>
                                     <TextBlock Text=" минут"/>
                                 </StackPanel>
-                                <StackPanel Style="{StaticResource style}" Orientation="Horizontal">
+                                <StackPanel Style="{StaticResource Style}" Orientation="Horizontal">
                                     <TextBlock Text="* скидка "/>
                                     <TextBlock Text="{Binding Discount}"/>
                                     <TextBlock Text=" %"/>
                                 </StackPanel>
-                                <StackPanel x:Name="MyStackPanel2" Style="{StaticResource style2}" Orientation="Horizontal">
+                                <StackPanel x:Name="MyStackPanel2" Style="{StaticResource Style2}" Orientation="Horizontal">
                                     <Button Content="редактировать" Tag="{Binding Id}" Click="Button_Click_1" Margin="2,2,2,2" Background="White" BorderBrush="Gray" BorderThickness="2"/>
                                     <Button Content="удалить" Tag="{Binding Id}" Click="Button_Click" Margin="2,2,2,2" Background="White" BorderBrush="Gray" BorderThickness="2"/>
                                 </StackPanel>
@@ -117,7 +125,7 @@
             <Label Content="{Binding countAllRecords}"/>
             <Label Content="Выведеные"/>
             <Label Content="{Binding countVivodRecords}"/>
-            <Button Content="Добавить" Style="{StaticResource buttonAdmin}" Name="btnAdd" Click="btnAdd_Click"/>
+            <Button Content="Добавить" Style="{StaticResource AddButtonStyle}" Name="btnAdd" Click="btnAdd_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using SalonKrasotyDescktop.entities;
 using SalonKrasotyDescktop.entities.Dtos;
 using SalonKrasotyDescktop.ViewModels;
+using SalonKrasotyDescktop.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,14 @@ namespace SalonKrasotyDescktop.views.Forms
     /// </summary>
     public partial class AddUser : Window
     {
-        MainViewModel viewModel;
-        public AddUser(MainViewModel viewModel)
+        IServiceViewModel viewModel;
+        public AddUser(IServiceViewModel viewModel)
         {
             InitializeComponent();
             this.viewModel = viewModel;
         }
         ServiceDto service;
-        public AddUser(MainViewModel viewModel, ServiceDto service)
+        public AddUser(IServiceViewModel viewModel, ServiceDto service)
         {
             InitializeComponent();
             this.viewModel = viewModel;
