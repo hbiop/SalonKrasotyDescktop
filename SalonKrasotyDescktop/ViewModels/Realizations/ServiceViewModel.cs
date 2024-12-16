@@ -106,6 +106,7 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
                 {
                     _salon.Service.Add(service);
                     _salon.SaveChanges();
+                    OnPropertyChanged();
                     MessageBox.Show("Услуга была добавлена");
                 }
                 catch
@@ -141,6 +142,7 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
                 {
                     _salon.Entry(service);
                     _salon.SaveChanges();
+                    OnPropertyChanged();
                     MessageBox.Show("Услуга была добавлена");
                 }
                 catch

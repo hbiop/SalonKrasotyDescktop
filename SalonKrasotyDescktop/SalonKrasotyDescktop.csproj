@@ -95,6 +95,9 @@
     <Compile Include="ViewModels\Interfaces\IAdminViewModel.cs" />
     <Compile Include="ViewModels\Realizations\AdminViewModel.cs" />
     <Compile Include="ViewModels\Realizations\ServiceViewModel.cs" />
+    <Compile Include="Views\Forms\AddRegistration.xaml.cs">
+      <DependentUpon>AddRegistration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Forms\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Forms\AddRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Forms\AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

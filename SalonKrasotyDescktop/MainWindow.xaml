@@ -126,6 +126,7 @@
             <Label Content="Выведеные"/>
             <Label Content="{Binding countVivodRecords}"/>
             <Button Content="Добавить" Style="{StaticResource AddButtonStyle}" Name="btnAdd" Click="btnAdd_Click"/>
+            <Button Content="Записать клиента" Style="{StaticResource AddButtonStyle}" Name="btnAddRegistration" Click="btnAddRegistration_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -33,6 +33,7 @@ namespace SalonKrasotyDescktop.views.Forms
             tbId.Visibility = Visibility.Hidden;
             lbId.Visibility = Visibility.Hidden;
             ButtonAdd.Click += ButtonAdd_Click;
+            ButtonAddImages.Visibility = Visibility.Hidden;
         }
         ServiceDto service;
         public AddUser(IServiceViewModel viewModel, ServiceDto service)
@@ -42,10 +43,10 @@ namespace SalonKrasotyDescktop.views.Forms
             this.service = service;
             tbId.Text = service.Id.ToString();
             tbNazvanie.Text = service.Title;
-            tbDlitelnost.Text = service.Time.ToString();
+            tbDlitelnost.Text = (service.Time * 60).ToString();
             tbOpisanie.Text = service.Description;
             tbSkidka.Text = service.Discount.ToString();
-            tbStoimost.Text = service.NewCost.ToString();
+            tbStoimost.Text = service.Cost.ToString();
             ButtonAdd.Content = "Изменить";
             ButtonAdd.Click += ButtonChange_Click;
         }

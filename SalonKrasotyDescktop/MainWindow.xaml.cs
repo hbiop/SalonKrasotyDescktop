@@ -19,6 +19,7 @@ using SalonKrasotyDescktop.ViewModels.Realizations;
 using SalonKrasotyDescktop.views.Forms;
 using SalonKrasotyDescktop.ViewModels.Interfaces;
 using SalonKrasotyDescktop.Entities;
+using SalonKrasotyDescktop.Views.Forms;
 
 namespace SalonKrasotyDescktop
 {
@@ -97,6 +98,12 @@ namespace SalonKrasotyDescktop
                     addUser.ShowDialog();
                 }
             }
+        }
+
+        private void btnAddRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            AddRegistration addRegistration = new AddRegistration();
+            addRegistration.Show();
         }
     }
 }
