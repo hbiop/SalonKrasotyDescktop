@@ -12,6 +12,7 @@ using System.Windows;
 using SalonKrasotyDescktop.Mappers.Interfaces;
 using SalonKrasotyDescktop.Mappers.Realizations;
 using SalonKrasotyDescktop.Entities;
+using System.Runtime.Remoting.Contexts;
 
 namespace SalonKrasotyDescktop.ViewModels.Realizations
 {
@@ -20,6 +21,8 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
         private List<ServiceDto> _services = new List<ServiceDto>();
         private IServiceMapper serviceMapper = new ServiceMapper();
         SalonKrasotyEntities _salon;
+        private int sortType, filterType;
+        private string searchWord;
         public List<ServiceDto> services
         {
             get => _services;
@@ -78,6 +81,8 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
                     }
                     _salon.Service.Remove(_salon.Service.Where(s => s.ID == id).FirstOrDefault());
                     _salon.SaveChanges();
+                    OnPropertyChanged();
+                    GetServices(this.sortType, this.filterType, this.searchWord);
                     MessageBox.Show("Пользователь был удалён");
                 }
                 catch 
@@ -89,6 +94,9 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
 
         public void GetServices(int sortType, int filterType, string searchWord)
         {
+            this.sortType = sortType;
+            this.filterType = filterType;
+            this.searchWord = searchWord;
             InitData();
             countAllRecords = services.Count;
             Sort(sortType);
@@ -107,6 +115,7 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
                     _salon.Service.Add(service);
                     _salon.SaveChanges();
                     OnPropertyChanged();
+                    GetServices(this.sortType, this.filterType, this.searchWord);
                     MessageBox.Show("Услуга была добавлена");
                 }
                 catch
@@ -140,9 +149,16 @@ namespace SalonKrasotyDescktop.ViewModels.Realizations
             {
                 try
                 {
-                    _salon.Entry(service);
+                    var s = _salon.Service.Find(service.ID);
+                    s.Title = service.Title;
+                    s.Cost = service.Cost;
+                    s.Description = service.Description;
+                    s.Discount = service.Discount;
+                    s.DurationInSeconds = service.DurationInSeconds;
+                    s.MainImagePath = service.MainImagePath;
                     _salon.SaveChanges();
                     OnPropertyChanged();
+                    GetServices(this.sortType, this.filterType, this.searchWord);
                     MessageBox.Show("Услуга была добавлена");
                 }
                 catch

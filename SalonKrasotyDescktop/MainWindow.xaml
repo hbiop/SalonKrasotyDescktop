@@ -67,8 +67,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <ComboBox Grid.Column="0" SelectionChanged="cmbSortStoimost_SelectionChanged" SelectedIndex="0" Name="cmbSortStoimost">
-                    <ComboBoxItem>сортировка по возрастанию</ComboBoxItem>
-                    <ComboBoxItem>сортировка по убыванию</ComboBoxItem>
+                    <ComboBoxItem>сортировка по возрастанию(По цене)</ComboBoxItem>
+                    <ComboBoxItem>сортировка по убыванию(По цене)</ComboBoxItem>
                 </ComboBox>
                 <ComboBox Grid.Column="1" SelectionChanged="cmbFilterDisount_SelectionChanged" HorizontalAlignment="Stretch" SelectedIndex="0" Name="cmbFilterDisount">
                     <ComboBoxItem>Все</ComboBoxItem>
@@ -127,6 +127,7 @@
             <Label Content="{Binding countVivodRecords}"/>
             <Button Content="Добавить" Style="{StaticResource AddButtonStyle}" Name="btnAdd" Click="btnAdd_Click"/>
             <Button Content="Записать клиента" Style="{StaticResource AddButtonStyle}" Name="btnAddRegistration" Click="btnAddRegistration_Click"/>
+            <Button Content="Просмотреть записи" Style="{StaticResource AddButtonStyle}" Name="btnViewRegistrations" Click="btnViewRegistrations_Click"/>
         </StackPanel>
     </Grid>
 </Window>

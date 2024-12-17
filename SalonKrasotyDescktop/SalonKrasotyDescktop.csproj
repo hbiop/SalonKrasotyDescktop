@@ -79,6 +79,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\TimerBackgroundConverter.cs" />
+    <Compile Include="Views\Forms\ViewRegistrations.xaml.cs">
+      <DependentUpon>ViewRegistrations.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,12 +92,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BackgroundValueConverter.cs" />
+    <Compile Include="Entities\Dtos\ClientDto.cs" />
+    <Compile Include="Entities\Dtos\ClientServiceDto.cs" />
+    <Compile Include="Mappers\Interfaces\IClientMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IClientServiceMapper.cs" />
     <Compile Include="Mappers\Interfaces\IServiceMapper.cs" />
+    <Compile Include="Mappers\Realizations\ClientMapper.cs" />
+    <Compile Include="Mappers\Realizations\ClientServiceMapper.cs" />
     <Compile Include="Mappers\Realizations\ServiceMapper.cs" />
     <Compile Include="Testing\ServiceViewModelTest.cs" />
+    <Compile Include="ViewModels\Interfaces\IClientServiceViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IClientViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IServiceViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IAdminViewModel.cs" />
     <Compile Include="ViewModels\Realizations\AdminViewModel.cs" />
+    <Compile Include="ViewModels\Realizations\ClientServiceViewModel.cs" />
+    <Compile Include="ViewModels\Realizations\ClientViewModel.cs" />
     <Compile Include="ViewModels\Realizations\ServiceViewModel.cs" />
     <Compile Include="Views\Forms\AddRegistration.xaml.cs">
       <DependentUpon>AddRegistration.xaml</DependentUpon>
@@ -166,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Forms\EnterAdminCode.xaml" />
+    <Page Include="Views\Forms\ViewRegistrations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

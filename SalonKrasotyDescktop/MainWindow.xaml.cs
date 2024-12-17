@@ -33,13 +33,17 @@ namespace SalonKrasotyDescktop
         private static int Filter = 0;
         private static string Search = "";
         private IAdminViewModel _adminViewModel = new AdminViewModel();
-        private IServiceViewModel _serviceViewModel = new ServiceViewModel(salon);
+        private ServiceViewModel _serviceViewModel = new ServiceViewModel(salon);
         public MainWindow()
         {
             InitializeComponent();
+            _serviceViewModel.InitData();
             lvServices.DataContext = _serviceViewModel;
             stPanel.DataContext = _serviceViewModel;
             DataContext = _adminViewModel;
+            Search = "";
+            Sort = 0;
+            Filter = 0;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -99,11 +103,30 @@ namespace SalonKrasotyDescktop
                 }
             }
         }
-
+        private static AddRegistration addRegistration = null;
         private void btnAddRegistration_Click(object sender, RoutedEventArgs e)
         {
-            AddRegistration addRegistration = new AddRegistration();
-            addRegistration.Show();
+            if(addRegistration == null)
+            {
+                if (lvServices.SelectedIndex != -1)
+                {
+                    AddRegistration addRegistration = new AddRegistration(_serviceViewModel.services[lvServices.SelectedIndex]);
+                    addRegistration.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Выберите сервис");
+                }
+            }   
+        }
+        private static ViewRegistrations viewRegistrations = null;
+        private void btnViewRegistrations_Click(object sender, RoutedEventArgs e)
+        {
+            if(viewRegistrations == null)
+            {
+                viewRegistrations = new ViewRegistrations();
+                viewRegistrations.Show();
+            }
         }
     }
 }

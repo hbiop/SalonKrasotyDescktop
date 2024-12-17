@@ -19,19 +19,18 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Наименование услуги" Grid.Column="0" Grid.Row="0" x:Name="TextBoxTitle"/>
-        <TextBox Grid.Row="1" Grid.Column="0"/>
+        <TextBox Grid.Row="1" Grid.Column="0" x:Name="TextBoxServiceTitle"/>
         <Label Content="Продолжительность услуги(в минутах)" Grid.Column="1" Grid.Row="0" />
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBoxDuration"/>
         <Label Content="Клиенты" Grid.Column="0" Grid.Row="2" />
-        <ComboBox Grid.Row="2" Grid.Column="1"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CmbClients" ItemsSource="{Binding Path=clients}" DisplayMemberPath="Fio" SelectedIndex="0"/>
         <Label Content="Дата" Grid.Column="0" Grid.Row="3" />
-        <DatePicker Grid.Row="3" Grid.Column="1"/>
+        <DatePicker Grid.Row="3" Grid.Column="1" x:Name="DatePicker"/>
         <Label Content="Время начала проведения" Grid.Column="0" Grid.Row="4" />
-        <TextBox Grid.Row="4" Grid.Column="1" x:Name="TextBoxStartTime" TextChanged="TextBoxStartTime_TextChanged" PreviewTextInput="TextBoxStartTime_PreviewTextInput" PreviewKeyDown="TextBoxStartTime_PreviewKeyDown"/>
-        <Label Content="Время конца проведения" Grid.Column="0" Grid.Row="5" />
-        <TextBox Grid.Row="5" Grid.Column="1" IsEnabled="False"/>
-        <DatePicker/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="TextBoxStartTime" PreviewKeyDown="TextBoxStartTime_PreviewKeyDown"/>
+        <Button Content="Добавить регистрацию" Grid.Column="0" Grid.Row="6" Name="AddRegistrationButton" Click="AddRegistrationButton_Click"/>
     </Grid>
 </Window>
